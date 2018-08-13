@@ -92,6 +92,13 @@
       or openio_keystone_bootstrap_all_nodes"
   tags: configure
 
+- name: Diagnose common problems with keystone deployments
+  command: "keystone-manage doctor"
+  register: keystone_doctor
+  failed_when: keystone_doctor.rc != 0
+  changed_when: false
+  run_once: true
+
 - import_tasks: postinstall.yml
   tags: configure
 
